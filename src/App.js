@@ -102,7 +102,6 @@ export default function App() {
             for (let response in responses){
               
               // Split the response into multiple properties
-              console.log(headerArray[response]);
               let properties = responses[response].split(';');
               
               // Get each individual property of the response
@@ -111,40 +110,26 @@ export default function App() {
                 let field = properties[property].replace(/['"]+/g, '').replace(/[^a-zA-Z ]/g, "")
 
                 // Translate the likliehood of attendance to a weight
-                if (header[response].replace(/['"]+/g, '') == "How often do you think youll attend SI sessions"){
+                if (header[response].replace(/['"]+/g, '') == header[2].replace(/['"]+/g, '')){ // check for likliehood response
                   currentWeight = weight[field]; // Replace all special characters with empty string
                 }
                 // Add the weight to the json file 
                 else if ((header[response].replace(/['"]+/g, '') != "Timestamp" || header[response].replace(/['"]+/g, '') != "What is your RIT email?") && response > 2 && field){
                   if (response-3 < 12){
-                    console.log("time:" + headerArray[response]);
                     jsonData[field].am[response-3] += currentWeight;
-                    console.log("day: " + JSON.stringify(jsonData[field]));
                   } else if (response-3 > 12){
-                    console.log("time:" + headerArray[response]);
                     jsonData[field].pm[response-3] += currentWeight;
-                    console.log("day: " + JSON.stringify(jsonData[field]));
                   }
                 }
-                 console.log("\t" + properties[property].replace(/['"']+/g,''));
               }
-              console.log(currentWeight);
             }
-            console.log();
-
           }
           
-          //console.log(JSON.stringify(jsonData));
-          console.log(parsedJsonData);
-          //console.log(JSON.parse(JSON.stringify(parsedJsonData[0])));
-          console.log(parsedJsonData);
-          console.log(typeof parsedJsonData);
+          setTimeData(parsedJsonData);
         };
 
         
         const csvString = fileReader.readAsText(csvFile);
-
-        setTimeData(parsedJsonData);
 
   }
 
