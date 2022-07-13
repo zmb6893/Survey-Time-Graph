@@ -28,18 +28,7 @@ const weight = {
 }
 
 export default function App() {  
-  // Hooks
-  const [graphColor, setGraphColor] = useState("red");
-
-  const [csvFile, setCsvFile] = useState();
-
-  const [theme, setTheme] = useState({
-    backgroundColor: 'black',
-    border: '1px solid white',
-    textColor: 'white'
-  });
-
-  let jsonData = {
+  var jsonData = {
     'Sunday': {day: 'Sun', dayValue: 0, am: [0,0,0,0,0,0,0,0,0,0,0,0], pm: [0,0,0,0,0,0,0,0,0,0,0,0]},
     'Monday': {day: 'Mon', dayValue: 1, am: [0,0,0,0,0,0,0,0,0,0,0,0], pm: [0,0,0,0,0,0,0,0,0,0,0,0]},
     'Tuesday': {day: 'Tue', dayValue: 2, am: [0,0,0,0,0,0,0,0,0,0,0,0], pm: [0,0,0,0,0,0,0,0,0,0,0,0]},
@@ -58,6 +47,21 @@ export default function App() {
     jsonData['Friday'],
     jsonData['Saturday'],
   );
+
+  // Hooks
+  const [graphColor, setGraphColor] = useState("red");
+
+  const [csvFile, setCsvFile] = useState();
+
+  const [timeData, setTimeData] = useState(parsedJsonData);
+
+  const [theme, setTheme] = useState({
+    backgroundColor: 'black',
+    border: '1px solid white',
+    textColor: 'white'
+  });
+
+  
 
   const fileReader = new FileReader(csvFile);
 
@@ -140,6 +144,8 @@ export default function App() {
         
         const csvString = fileReader.readAsText(csvFile);
 
+        setTimeData(parsedJsonData);
+
   }
 
   return (
@@ -147,7 +153,7 @@ export default function App() {
       <h1>Time Availability Chart</h1>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <div>
-          <Heatmap graphColor={graphColor} theme={theme} data={parsedJsonData}/>
+          <Heatmap graphColor={graphColor} theme={theme} data={timeData}/>
         </div>
           <div>
             <h2>Instructions:</h2>
