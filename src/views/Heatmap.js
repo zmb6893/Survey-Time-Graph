@@ -8,7 +8,7 @@ import { selectAll, svg } from 'd3';
  * @returns 
  * @author Zoe Bingham
  */
-const Heatmap = ({graphColor, theme}) => {
+const Heatmap = ({graphColor, theme, data}) => {
 
     // Create a reference for our svg
     const Chart = useRef();
@@ -22,20 +22,20 @@ const Heatmap = ({graphColor, theme}) => {
 
     const cellSize = 30;
 
-    // Sample data
-    function generateValues() {
-        return Array.from({length:12}, () => (Math.floor(Math.random()*100)+1)/100)
-    }
+    // // Sample data
+    // function generateValues() {
+    //     return Array.from({length:12}, () => (Math.floor(Math.random()*100)+1)/100)
+    // }
 
-    const data = [
-        {day: 'Sun', dayValue: 0, am: generateValues(), pm: generateValues()},
-        {day: 'Mon', dayValue: 1, am: generateValues(), pm: generateValues()},
-        {day: 'Tue', dayValue: 2, am: generateValues(), pm: generateValues()},
-        {day: 'Wed', dayValue: 3, am: generateValues(), pm: generateValues()},
-        {day: 'Thu', dayValue: 4, am: generateValues(), pm: generateValues()},
-        {day: 'Fri', dayValue: 5, am: generateValues(), pm: generateValues()},
-        {day: 'Sat', dayValue: 6, am: generateValues(), pm: generateValues()}
-    ]
+    // const data = [
+    //     {day: 'Sun', dayValue: 0, am: generateValues(), pm: generateValues()},
+    //     {day: 'Mon', dayValue: 1, am: generateValues(), pm: generateValues()},
+    //     {day: 'Tue', dayValue: 2, am: generateValues(), pm: generateValues()},
+    //     {day: 'Wed', dayValue: 3, am: generateValues(), pm: generateValues()},
+    //     {day: 'Thu', dayValue: 4, am: generateValues(), pm: generateValues()},
+    //     {day: 'Fri', dayValue: 5, am: generateValues(), pm: generateValues()},
+    //     {day: 'Sat', dayValue: 6, am: generateValues(), pm: generateValues()}
+    // ]
 
 
     const timeData = [
@@ -121,6 +121,8 @@ const Heatmap = ({graphColor, theme}) => {
 
             // Repaint
             // AM
+            console.log(graphColor);
+            console.log(day.am);
             svg.append('g')
                 .selectAll('rect')
                 .data(day.am)
@@ -130,7 +132,7 @@ const Heatmap = ({graphColor, theme}) => {
                 .attr('width', cellSize)
                 .attr('height', cellSize)
                 .attr('fill', graphColor)
-                .attr('fill-opacity', d => (d).toString())
+                .attr('fill-opacity', d => (d/30).toString())
             
             // PM 
             svg.append('g')
@@ -142,7 +144,7 @@ const Heatmap = ({graphColor, theme}) => {
                 .attr('width', cellSize)
                 .attr('height', cellSize)
                 .attr('fill', graphColor)
-                .attr('fill-opacity', d => (d).toString())
+                .attr('fill-opacity', d => (d/30).toString())
         })
     });
 
