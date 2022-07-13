@@ -121,8 +121,6 @@ const Heatmap = ({graphColor, theme, data}) => {
 
             // Repaint
             // AM
-            console.log(graphColor);
-            console.log(day.am);
             svg.append('g')
                 .selectAll('rect')
                 .data(day.am)
