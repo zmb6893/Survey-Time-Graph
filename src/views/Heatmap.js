@@ -22,22 +22,6 @@ const Heatmap = ({graphColor, theme, data}) => {
 
     const cellSize = 30;
 
-    // // Sample data
-    // function generateValues() {
-    //     return Array.from({length:12}, () => (Math.floor(Math.random()*100)+1)/100)
-    // }
-
-    // const data = [
-    //     {day: 'Sun', dayValue: 0, am: generateValues(), pm: generateValues()},
-    //     {day: 'Mon', dayValue: 1, am: generateValues(), pm: generateValues()},
-    //     {day: 'Tue', dayValue: 2, am: generateValues(), pm: generateValues()},
-    //     {day: 'Wed', dayValue: 3, am: generateValues(), pm: generateValues()},
-    //     {day: 'Thu', dayValue: 4, am: generateValues(), pm: generateValues()},
-    //     {day: 'Fri', dayValue: 5, am: generateValues(), pm: generateValues()},
-    //     {day: 'Sat', dayValue: 6, am: generateValues(), pm: generateValues()}
-    // ]
-
-
     const timeData = [
         {time: '12:00-1:00', timeValue: 0},
         {time: '1:00-2:00', timeValue: 1},
